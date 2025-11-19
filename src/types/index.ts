@@ -1,5 +1,19 @@
 import { z } from 'zod'
 
+interface ToolConfig {
+  name: string
+  config: {
+    title: string
+    description: string
+    inputSchema: z.ZodTypeAny
+    outputSchema: z.ZodTypeAny
+  }
+  handler: ( args: any ) => Promise< {
+    content: { type: 'text', text: string }[]
+    struturedContent: any
+  } >
+}
+
 const CreateEventInputSchema = z.object( {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   eventDetails: z.object( { 
@@ -42,6 +56,8 @@ const DeleteEventInputSchema = z.object( {
   eventId: z.string().describe( 'Event ID' ),
 } )
 
+const DeleteEventOutputSchema = z.null().describe( 'No output' )
+
 const CheckAvailabilityInputSchema = z.object( { 
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   scheduledTime: z.string().or( z.date() ).describe( 'Scheduled time for lesson' ),
@@ -72,6 +88,9 @@ export {
   UpdateEventInputSchema,
   UpdateEventOutputSchema,
   DeleteEventInputSchema,
+  DeleteEventOutputSchema,
   FindAvailableSlotsInputSchema,
   FindAvailableSlotsOutputSchema
 }
+
+export type { ToolConfig }
