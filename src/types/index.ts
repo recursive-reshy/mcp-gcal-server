@@ -46,11 +46,14 @@ const FindAvailableSlotsInputSchema = z.object( {
   date: z.string().or( z.date() ).describe( 'Date to find available slots for' ),
 } )
 
+const FindAvailableSlotsOutputSchema = z.array( z.date() ).describe( 'Available slots for the date' )
+
 export { 
   CheckAvailabilityInputSchema,
   CheckAvailabilityOutputSchema,
   CreateEventInputSchema,
   UpdateEventInputSchema,
   DeleteEventInputSchema,
-  FindAvailableSlotsInputSchema
+  FindAvailableSlotsInputSchema,
+  FindAvailableSlotsOutputSchema
 }
