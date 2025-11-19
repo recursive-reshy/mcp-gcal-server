@@ -18,7 +18,7 @@ const checkAvailabilityTool = {
       return {
         content: [
           { type: 'text' as const,
-            test: JSON.stringify( availability, null, 2 )
+            text: JSON.stringify( availability, null, 2 )
           }
         ],
         struturedContent: availability

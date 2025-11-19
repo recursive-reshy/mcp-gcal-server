@@ -18,7 +18,7 @@ const findAvailableSlotsTool = {
       return {
         content: [
           { type: 'text' as const,
-            test: JSON.stringify( availableSlots, null, 2 )
+            text: JSON.stringify( availableSlots, null, 2 )
           }
         ],
         struturedContent: availableSlots

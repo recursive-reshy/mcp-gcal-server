@@ -19,7 +19,7 @@ const updateEventTool = {
     return {
       content: [
         { type: 'text' as const,
-          test: JSON.stringify( event, null, 2 )
+          text: JSON.stringify( event, null, 2 )
         }
       ],
       struturedContent: event
