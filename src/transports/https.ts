@@ -9,7 +9,7 @@ const server = new McpServer( {
 tools.forEach( ( { name, config, handler } ) => {
   server.registerTool(
     name,
-    config as unknown as Parameters< typeof server.registerTool >[ 1 ],
+    config,
     handler
   )
 } )
