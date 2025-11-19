@@ -1,15 +1,16 @@
 // Schemas
-import { UpdateEventInputSchema, UpdateEventOutputSchema } from '../types/index.js'
+import type { ToolConfig } from '../types/index.js'
+import { UpdateEventInputSchema as inputSchema, UpdateEventOutputSchema as outputSchema } from '../types/index.js'
 // Services
 import calendarService from '../services/calendar.service.js'
 
-const updateEventTool = {
+const updateEventTool: ToolConfig = {
   name: 'updateEvent',
   config: {
     title: 'Update Event',
     description: 'Update an existing event on the teacher\'s calendar',
-    inputSchema: UpdateEventInputSchema,
-    outputSchema: UpdateEventOutputSchema,
+    inputSchema,
+    outputSchema
   },
   handler: async ( args: any ) => {
     const { calendarId, eventId, eventDetails } = args
