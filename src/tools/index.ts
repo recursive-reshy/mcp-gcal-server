@@ -4,10 +4,10 @@ import deleteEventTool from './deleteEvent.js'
 import checkAvailabilityTool from './checkAvailability.js'
 import findAvailableSlotsTool from './findAvailableSlots.js'
 
-export {
+export const tools = [
   createEventTool,
   updateEventTool,
   deleteEventTool,
   checkAvailabilityTool,
-  findAvailableSlotsTool
-}
+  findAvailableSlotsTool,
+]
