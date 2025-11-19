@@ -10,6 +10,14 @@ const CreateEventInputSchema = z.object( {
   } )
 } )
 
+const CreateEventOutputSchema = z.object( { 
+  id: z.string().describe( 'Event ID' ),
+  summary: z.string().describe( 'Summary of the event' ),
+  start: z.string().describe( 'Start time of the event' ),
+  end: z.string().describe( 'End time of the event' ),
+  description: z.string().optional().describe( 'Description of the event' ),
+} )
+
 const UpdateEventInputSchema = z.object( {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   eventId: z.string().describe( 'Event ID' ),
@@ -52,6 +60,7 @@ export {
   CheckAvailabilityInputSchema,
   CheckAvailabilityOutputSchema,
   CreateEventInputSchema,
+  CreateEventOutputSchema,
   UpdateEventInputSchema,
   DeleteEventInputSchema,
   FindAvailableSlotsInputSchema,
