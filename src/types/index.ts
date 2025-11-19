@@ -5,8 +5,8 @@ interface ToolConfig {
   config: {
     title: string
     description: string
-    inputSchema: z.ZodTypeAny
-    outputSchema: z.ZodTypeAny
+    inputSchema: Record< string, any >
+    outputSchema: Record< string, any > | undefined
   }
   handler: ( args: any ) => Promise< {
     content: { type: 'text', text: string }[]
@@ -14,7 +14,7 @@ interface ToolConfig {
   } >
 }
 
-const CreateEventInputSchema = z.object( {
+const CreateEventInputSchema = {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   eventDetails: z.object( { 
     summary: z.string().describe( 'Summary of the event' ),
@@ -22,17 +22,17 @@ const CreateEventInputSchema = z.object( {
     description: z.string().optional().describe( 'Description of the event' ),
     attendees: z.array( z.string().email() ).optional().describe( 'Attendees of the event' ),
   } )
-} )
+}
 
-const CreateEventOutputSchema = z.object( { 
+const CreateEventOutputSchema = { 
   id: z.string().describe( 'Event ID' ),
   summary: z.string().describe( 'Summary of the event' ),
   start: z.string().describe( 'Start time of the event' ),
   end: z.string().describe( 'End time of the event' ),
   description: z.string().optional().describe( 'Description of the event' ),
-} )
+}
 
-const UpdateEventInputSchema = z.object( {
+const UpdateEventInputSchema = {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   eventId: z.string().describe( 'Event ID' ),
   eventDetails: z.object( { 
@@ -41,29 +41,27 @@ const UpdateEventInputSchema = z.object( {
     description: z.string().optional().describe( 'Description of the event' ),
     attendees: z.array( z.string().email() ).optional().describe( 'Attendees of the event' ),
   } )
-} )
+}
 
-const UpdateEventOutputSchema = z.object( { 
+const UpdateEventOutputSchema = { 
   id: z.string().describe( 'Event ID' ),
   summary: z.string().describe( 'Summary of the event' ),
   start: z.string().describe( 'Start time of the event' ),
   end: z.string().describe( 'End time of the event' ),
   description: z.string().optional().describe( 'Description of the event' ),
-} )
+}
 
-const DeleteEventInputSchema = z.object( {
+const DeleteEventInputSchema = {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   eventId: z.string().describe( 'Event ID' ),
-} )
+}
 
-const DeleteEventOutputSchema = z.null().describe( 'No output' )
-
-const CheckAvailabilityInputSchema = z.object( { 
+const CheckAvailabilityInputSchema = { 
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   scheduledTime: z.string().or( z.date() ).describe( 'Scheduled time for lesson' ),
-} )
+}
 
-const CheckAvailabilityOutputSchema = z.object( { 
+const CheckAvailabilityOutputSchema = { 
   available: z.boolean().describe( 'Whether the time slot is available' ),
   conflicts: z.array( 
     z.object( { 
@@ -71,14 +69,16 @@ const CheckAvailabilityOutputSchema = z.object( {
         end: z.string().describe( 'End time of the conflict' ),
       } ) 
     ).optional().describe( 'Conflicts with the scheduled time' ),
-} )
+}
 
-const FindAvailableSlotsInputSchema = z.object( {
+const FindAvailableSlotsInputSchema = {
   calendarId: z.string().describe( 'Teacher\'s calendar ID' ),
   date: z.string().or( z.date() ).describe( 'Date to find available slots for' ),
-} )
+}
 
-const FindAvailableSlotsOutputSchema = z.array( z.date() ).describe( 'Available slots for the date' )
+const FindAvailableSlotsOutputSchema = {
+  availableSlots: z.array( z.date() ).describe( 'Available slots for the date' ),
+}
 
 export { 
   CheckAvailabilityInputSchema,
@@ -88,7 +88,6 @@ export {
   UpdateEventInputSchema,
   UpdateEventOutputSchema,
   DeleteEventInputSchema,
-  DeleteEventOutputSchema,
   FindAvailableSlotsInputSchema,
   FindAvailableSlotsOutputSchema
 }
