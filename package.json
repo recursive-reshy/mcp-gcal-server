@@ -20,8 +20,10 @@
     "start": "node --env-file=.env dist/server.js"
   },
   "dependencies": {
+    "@cfworker/json-schema": "^4.1.1",
     "@modelcontextprotocol/sdk": "^1.22.0",
     "dayjs": "^1.11.19",
+    "eventemitter3": "^5.0.1",
     "express": "^5.1.0",
     "googleapis": "^166.0.0",
     "zod": "^4.1.12"
