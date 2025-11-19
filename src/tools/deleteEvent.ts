@@ -1,6 +1,6 @@
 // Schemas
 import type { ToolConfig } from '../types/index.js'
-import { DeleteEventInputSchema as inputSchema, DeleteEventOutputSchema as outputSchema } from '../types/index.js'
+import { DeleteEventInputSchema as inputSchema } from '../types/index.js'
 // Services
 import calendarService from '../services/calendar.service.js'
 
@@ -10,7 +10,7 @@ const deleteEventTool: ToolConfig = {
     title: 'Delete Event',
     description: 'Delete an existing event on the teacher\'s calendar',
     inputSchema,
-    outputSchema
+    outputSchema: undefined
   },
   handler: async ( args: any ) => {
     const { calendarId, eventId } = args
@@ -23,7 +23,7 @@ const deleteEventTool: ToolConfig = {
           text: `Event deleted: ${ eventId }`
         }
       ],
-      struturedContent: outputSchema.parse( null )
+      struturedContent: null
     }
   }
 }
